@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %} Movements {% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<style type="text/css">
+    
+    body {
+  background-color:  #140505;
+  
+}
+
+</style>
+<div class="container">
+    <h2 class="text-center mt-3" style="color:#fff" "font-family:verdana">
+        Movements
+    </h2>
+    <a href="/" class="btn btn-info">HOME</a>
+    <form action="/movements" method="post">
+        <div class="row">
+            <div class="form-group col">
+                <label for="from-location" style="color:#fff" "font-family:verdana">From location:</label>
+                <select name="from-location" id="from-location" class="form-control">
+                    <option value="none" style="color:#fff" "font-family:verdana">None</option>
+                    {% for location in locations %}
+                    <option value="{{location.id}}">{{location.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col">
+                <label for="to-location" style="color:#fff" "font-family:verdana">To location:</label>
+                <select name="to-location" id="to-location" class="form-control">
+                    <option value="none" style="color:#fff" "font-family:verdana">None</option>
+                    {% for location in locations %}
+                    <option value="{{location.id}}">{{location.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col">
+                <label for="product" style="color:#fff" "font-family:verdana">Product</label>
+                <select name="product" id="product" class="form-control">
+                    {% for product in products %}
+                    <option value="{{ product.id }}">{{product.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col">
+                <label for="quantity" style="color:#fff" "font-family:verdana">Quantity</label>
+                <input type="number" name="quantity" id="quantity" class="form-control" min="1">
+            </div>
+        </div>
+        <input type="submit" value="Add movement" class="form-control btn btn-primary">
+    </form>
+
+    {% if movements|length < 1%}
+    <h4>No movements yet</h4>
+    {% else %}
+    <hr>
+    <h2 style="color:yellow" "font-family:verdana">
+        Previous movements
+    </h2>
+    <table class="table">
+        <thead>
+            <th style="color:#fff" "font-family:verdana">ID</th>
+            <th style="color:#fff" "font-family:verdana">From</th>
+            <th style="color:#fff" "font-family:verdana">To</th>
+            <th style="color:#fff" "font-family:verdana">Product</th>
+            <th style="color:#fff" "font-family:verdana">Quantity</th>
+            <th style="color:#fff" "font-family:verdana">Actions</th>
+        </thead>
+        {% for movement in movements %}
+        <tr>
+            <td style="color:#fff" "font-family:verdana">{{movement.movement_id}}</td>
+            <td style="color:#fff" "font-family:verdana">{{movement.from_location.name}}</td>
+            <td style="color:#fff" "font-family:verdana">{{movement.to_location.name}}</td>
+            <td style="color:#fff" "font-family:verdana">{{movement.product.name}}</td>
+            <td style="color:#fff" "font-family:verdana">{{movement.quantity}}</td>
+            <td>
+                <a href="/movements/{{movement.movement_id}}/update" class="btn btn-info">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{%endblock%}

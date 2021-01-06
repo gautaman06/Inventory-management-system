@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Report {% endblock %}
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<style type="text/css">
+    
+    body {
+  background-color:  #140505;
+  
+}
+
+</style>
+<div class="container">
+    <h2 class="text-center" style="color:yellow" "font-family:verdana">
+        Final Report !
+    </h2>
+    <a href="/" class="btn btn-info">HOME</a>
+    <table class="table">
+        <thead>
+            <th style="color:yellow" "font-family:verdana">Location</th>
+            <th style="color:yellow" "font-family:verdana">Product</th>
+            <th style="color:yellow" "font-family:verdana">Quantity</th>
+        </thead>
+        {% for row in report %}
+        <tr>
+            <td style="color:#fff" "font-family:verdana">{{row.location}}</td>
+            <td style="color:#fff" "font-family:verdana">{{row.product}}</td>
+            <td style="color:#fff" "font-family:verdana">{{row.quantity}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</div>
+
+{% endblock %}

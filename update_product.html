@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block title %} Update Products {% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<style type="text/css">
+    
+    body {
+  background-color:  #140505;
+  
+}
+
+</style>
+<div class="container">
+    <h2 class="text-center" style="color:yellow" "font-family:verdana">
+        Update product
+    </h2>
+    <form action="/products/{{product.id}}/update" method="post">
+        <div class="form-group">
+            <label for="product-name" style="color:#fff" "font-family:verdana">
+                Product Name
+            </label>
+            <input type="text" class="form-control" name="product-name" id="product-name" value="{{product.name}}">
+            <input type="submit" class="form-control btn-primary mt-2" value="Update product">
+        </div>
+    </form>
+</div>
+{% endblock %}
