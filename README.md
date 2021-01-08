@@ -36,7 +36,8 @@ Requirements :
     
     PRODUCT UPDATION ::
     
-
+![](Photos/Screenshot%20(282).png)
+    ![](Photos/Screenshot%20(283).png)
  
  
 
