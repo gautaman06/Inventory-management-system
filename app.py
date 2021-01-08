@@ -11,9 +11,14 @@ class Product(db.Model):
     __tablename__ = 'product'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(50),nullable=False)
+    quan=db.Column(db.Integer,nullable=False)
+    loc=db.Column(db.String(50),nullable=False)
 
     def __repr__(self):
         return '<Product %r>' %self.id
+        #return '<Product %r>' %self.n
+        #return '<Product %r>' %self.id
+    
 
 class Location(db.Model):
     __tablename__ = 'location'
@@ -46,10 +51,15 @@ def index():
 def products():
     if request.method == "GET":
         products = Product.query.all()
+        #quan=Product.query.all()
+        #loc=Product.query.all()
+        #Product.query.all()
         return render_template('products.html',products=products)
     if request.method == "POST":
-        product_name = request.form["product-name"]
-        new_product = Product(name=product_name)
+        product_name = request.form['product-name']
+        product_quan=request.form['product-quan']
+        product_loc=request.form['product-loc']
+        new_product = Product(name=product_name,quan=product_quan,loc=product_loc)
 
         try:
             db.session.add(new_product)
@@ -65,6 +75,8 @@ def update_product(id):
         return render_template("update_product.html",product=product)
     if request.method == "POST":
         product.name = request.form['product-name']
+        product.quan=request.form['product-quan']
+        product.loc=request.form['product-loc']
 
         try:
             db.session.commit()
@@ -137,36 +149,6 @@ def movements():
                 except:
                     return "Database error"
 
-@app.route('/report')
-def report():
-    locations = Location.query.all()
-    products = Product.query.all()
-    report = []
-    
-    for location in locations:
-        for product in products:
-            row = {}
-            row["location"] = location.name
-            row["product"] = product.name
-            row["quantity"] = get_quantity(location.id,product.id)
-            report.append(row)
-    return render_template('report.html',report=report)
-
-def get_quantity(location,product):
-    added_products = Movement.query.\
-        filter(Movement.to_location_id==location,Movement.product_id==product)\
-            .from_self(func.sum(Movement.quantity,)).all()
-    added_products = added_products[0][0]
-    if added_products == None:
-        added_products = 0
-    removed_products = Movement.query.\
-        filter(Movement.from_location_id==location,Movement.product_id==product)\
-            .from_self(func.sum(Movement.quantity,name="removed")).all()
-    removed_products = removed_products[0][0]
-    if removed_products == None:
-        removed_products = 0
-    return added_products-removed_products
-
 @app.route('/movements/<int:id>/update',methods=["GET","POST"])
 def update_movements(id):
     movement_to_be_updated = Movement.query.get_or_404(id)
@@ -181,6 +163,33 @@ def update_movements(id):
         movement_to_be_updated.product_id = request.form["product"]
         movement_to_be_updated.quantity = request.form["quantity"] 
         pass
-
+def get_quantity(location,product):
+    added_products = Movement.query.\
+        filter(Movement.to_location_id==location,Movement.product_id==product)\
+            .from_self(func.sum(Movement.quantity,)).all()
+    added_products = added_products[0][0]
+    if added_products == None:
+        added_products = 0
+    removed_products = Movement.query.\
+        filter(Movement.from_location_id==location,Movement.product_id==product)\
+            .from_self(func.sum(Movement.quantity,name="removed")).all()
+    removed_products = removed_products[0][0]
+    if removed_products == None:
+        removed_products = 0
+    return added_products-removed_products    
+@app.route('/report')
+def report():
+    locations = Location.query.all()
+    products = Product.query.all()
+    report = []
+    
+    for location in locations:
+        for product in products:
+            row = {}
+            row["location"] = location.name
+            row["product"] = product.name
+            row["quantity"] = get_quantity(location.id,product.id)
+            report.append(row)
+    return render_template('report.html',report=report)
 if __name__ == "__main__":
     app.run(debug=True)
