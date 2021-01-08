@@ -36,11 +36,18 @@ Requirements :
     
     PRODUCT UPDATION ::
     
+    
+    
 
    ![](Photos/Screenshot%20(286).png)
    ![](Photos/Screenshot%20(283).png)
  
+          DATABASE
+          
+          
  
 
-
+ ![](Photos/Screenshot%20(288).png)
+   ![](Photos/Screenshot%20(289).png)
+   ![](Photos/Screenshot%20(290).png)
 
