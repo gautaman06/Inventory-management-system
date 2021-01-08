@@ -4,15 +4,15 @@ from sqlalchemy.sql.functions import func
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///frappe.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///frappe (1).db'
 db = SQLAlchemy(app)
 
 class Product(db.Model):
     __tablename__ = 'product'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(50),nullable=False)
-    quan=db.Column(db.Integer,nullable=False)
-    loc=db.Column(db.String(50),nullable=False)
+    quantity=db.Column(db.Integer,nullable=False)
+    location=db.Column(db.String(50),nullable=False)
 
     def __repr__(self):
         return '<Product %r>' %self.id
@@ -57,9 +57,9 @@ def products():
         return render_template('products.html',products=products)
     if request.method == "POST":
         product_name = request.form['product-name']
-        product_quan=request.form['product-quan']
-        product_loc=request.form['product-loc']
-        new_product = Product(name=product_name,quan=product_quan,loc=product_loc)
+        product_quantity=request.form['product-quan']
+        product_location=request.form['product-loc']
+        new_product = Product(name=product_name,quantity=product_quan,location=product_loc)
 
         try:
             db.session.add(new_product)
@@ -75,8 +75,8 @@ def update_product(id):
         return render_template("update_product.html",product=product)
     if request.method == "POST":
         product.name = request.form['product-name']
-        product.quan=request.form['product-quan']
-        product.loc=request.form['product-loc']
+        product.quantity=request.form['product-quan']
+        product.location=request.form['product-loc']
 
         try:
             db.session.commit()
@@ -148,6 +148,7 @@ def movements():
                     return redirect('/movements')
                 except:
                     return "Database error"
+
 
 @app.route('/movements/<int:id>/update',methods=["GET","POST"])
 def update_movements(id):
