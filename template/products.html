@@ -23,6 +23,14 @@
                 Product Name
             </label>
             <input type="text" class="form-control" name="product-name" id="product-name">
+            <label for="product-quan" style="color:#fff" "font-family:verdana">
+                 Product Quantity
+            </label>
+            <input type="number" class="form-control" quan="product-quan" id="product-quan" min="1">
+            <label for="product-loc" style="color:#fff" "font-family:verdana">
+                 Product Location
+            </label>
+            <input type="text" class="form-control" loc="product-loc" id="product-loc">
             <input type="submit" class="form-control btn-primary mt-2" value="Add product">
         </div>
     </form>
@@ -38,13 +46,22 @@
                 NAME
             </th>
             <th>
-                UPDATE
+                Quantity
             </th>
+            <th>
+                Location
+            </th>
+            <th>
+                Update
+            </th>
+
         </thead>
         {% for product in products %}
         <tr>
             <td style="color:#fff" "font-family:verdana">{{product.id}}</td>
             <td style="color:#fff" "font-family:verdana">{{product.name}}</td>
+            <td style="color:#fff" "font-family:verdana">{{product.quan}}</td>
+            <td style="color:#fff" "font-family:verdana">{{product.loc}}</td>
             <td>
                 <a href="/products/{{product.id}}/update" class="btn btn-info">EDIT PRODUCTS</a>
             </td>
