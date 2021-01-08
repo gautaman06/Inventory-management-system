@@ -29,16 +29,10 @@ Requirements :
    3. http://127.0.0.1:5000/ open this server in the browser( chrome )
    
    
-      ![](Photos/Screenshot%20(278).png)
- ![](Photos/Screenshot%20(269).png)
- ![](Photos/Screenshot%20(270).png)
- ![](Photos/Screenshot%20(271).png)
- ![](Photos/Screenshot%20(272).png)
- ![](Photos/Screenshot%20(273).png)
- ![](Photos/Screenshot%20(274).png)
-  ![](Photos/Screenshot%20(275).png)
-   ![](Photos/Screenshot%20(276).png)
-    ![](Photos/Screenshot%20(277).png)
+      
+  ![](Photos/Screenshot%20(279).png)
+   ![](Photos/Screenshot%20(280).png)
+    ![](Photos/Screenshot%20(281).png)
 
  
  
