@@ -29,7 +29,8 @@ Requirements :
    3. http://127.0.0.1:5000/ open this server in the browser( chrome )
    
    
-      
+   MOVEMENTS   UPDATION :
+
   ![](Photos/Screenshot%20(279).png)
    ![](Photos/Screenshot%20(280).png)
     ![](Photos/Screenshot%20(281).png)
